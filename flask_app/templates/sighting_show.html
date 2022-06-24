@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friend Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="topbartitle">
+            <h1 class="bigtitle">Sasquatch Websighting</h1>
+        </div>
+        <div class="topbar-span"></div>
+        <div class="topbar-but">
+            <p class="sessionname"> Hi! {{ session['first_name'] }} {{session ['last_name']}}</p>
+            <a class="link-but" href="/user/profile">Dashboard</a>
+            <a class="link-but" href="/logout">Logout</a>
+        </div> 
+    </div> 
+    <div class="container">
+        <div class="list">
+            <h2 class="table-title">Details about this Sighting:</h2>
+            <table class="table-spaced">
+                <tr>
+                    <td class="sightings"><h2>{{this_sighting.location}} on {{this_sighting.time_that}}</h2></td>
+                </tr>
+                <tr>
+                    <td class="sightings">What happened:</td>
+                </tr>
+                <tr>
+                    <td class="sightingsitalics">{{this_sighting.description}}</td>
+                </tr>
+                <tr>
+                    <td class="sightings"> # of Sasquatches : {{this_sighting.number}}</td>
+                </tr>        
+                <tr> 
+                    <td class="sightings">Reported by {{this_sighting.author}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="lower-bar">
+    </div>
+</body>
+</html>

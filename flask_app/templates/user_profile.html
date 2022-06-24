@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="topbartitle">
+            <h1 class="bigtitle">Sasquatch Websighting</h1>
+        </div>
+        <div class="topbar-span"></div>
+        <div class="topbar-but">
+            <p class="sessionname"> Hi! {{ session['first_name'] }} {{session ['last_name']}}</p>
+            <a class="link-but" href="/sighting">Report a sighting</a>
+            <a class="link-but" href="/logout">Logout</a>
+        </div> 
+    </div>
+    <div class="container">
+        <div class="list-sighting">
+            <h2 class="table-title">Reported sightings</h2>
+            <table class="table-info">
+                <tbody>
+                    {% for sighting in all_sightings %}
+                    <tr>
+                        <td>
+                            <p class="text-sighting">{{sighting.location}} - {{sighting.time_that}}</p>
+                            <p class="text-sighting">Reported By: {{sighting.author}}</p>
+                        </td>
+                        <td>
+                            <a class="table-links" href="/sighting/{{sighting.id}}">View</a>
+                            {% if session['user_id'] == sighting.user_id%}
+                            <a class="table-links" href="/sighting/edit/{{sighting.id}}">Edit</a>
+                            <a class="table-links" href="/sighting/delete/{{sighting.id}}">Delete</a>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="form-center">
+            <div class="warning-msg">
+            {% with messages = get_flashed_messages() %}     
+                {% if messages %}  
+                <div id="popup">                        
+                    {% for message in messages %}           
+                        <p>{{message}}</p>                   
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            </div>
+        </div>
+    </div>
+    <div class="lower_bar">
+    </div>
+</body>
+</html>

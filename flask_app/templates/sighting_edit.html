@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friend Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="topbartitle">
+            <h1 class="bigtitle">Sasquatch Websighting</h1>
+        </div>
+        <div class="topbar-span"></div>
+        <div class="topbar-but">
+            <p class="sessionname"> Hi! {{ session['first_name'] }} {{session ['last_name']}}</p>
+            <a class="link-but" href="/user/profile">Dashboard</a>
+            <a class="link-but" href="/logout">Logout</a>
+        </div> 
+    </div> 
+    <div class="container">
+        <div class="form-column">
+            <h2 class="table-title">Edit this Sighting:</h2>
+            <form action="/sighting/edit" method="POST">
+                <input type="hidden" name='user_id' value="{{ session['user_id'] }}">
+                <input type="hidden" name='id' value="{{ this_sighting.id }}">
+                <input type="hidden" name='author' value="{{session['first_name']}} {{session['last_name']}}">
+                <div class="form-left">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" value="{{this_sighting.location}}">
+                    <label for="description">Description:</label>
+                    <input class="textarea" type="text" id="description" name="description" value="{{this_sighting.description}}"></textarea>
+                </div>
+                <div class="form-right">
+                    <label for="number"># of Sasquatch:</label>
+                    <input type="number" id="number" name="number" value="{{this_sighting.number}}">
+                    <label for='time_that'>Date Sighted:</label>
+                    <input type="date" id='when' name='time_that' value="{{this_sighting.time_that}}">
+                    <input type="submit" class="form-but" value="Update Sighting">
+        </div>
+    </div>
+    <div class="lower-bar">
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sasquatch Websighting</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="topbartitle">
+            <h1 class="bigtitle">Sasquatch Websighting</h1>
+        </div>
+    </div>
+    <div class="warning-msg">
+        {% with messages = get_flashed_messages() %}     
+        {% if messages %}  
+        <div id="popup">                        
+            {% for message in messages %}           
+                <p>{{message}}</p>                   
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    </div>
+    <div class="container-column">
+        
+        <div class="form-center">
+            <div class="form-title">
+                <h2 class="boxheader-text">Create a new user</h2>
+            <h4>Already registered? Login ---></h4>
+            </div>
+            <form class="basicform "action="/create/user" method="POST">
+                <label for="first_name">First name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{ info.first_name }}">
+                <label for="last_name">Last name:</label>
+                <input type="text" id="last_name" name="last_name" value="{{ info.last_name }}">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" value="{{ info.email }}">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+                <label for="check">Confirm Password:</label>
+                <input type="password" id="check" name="check">
+                <input type="submit" class="form-but" value="Create User">
+            </form>
+        </div>
+        <div class="form-center">
+            <div class="form-title">
+                <h2 class="boxheader-text">Welcome back!</h2>
+                <h3> Sign in here.</h2>
+            </div>
+            <form class="basicform" action="/login" method="POST">
+                <label for="email">User's Email:</label>
+                <input type="text" name="email">
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+                <input type="submit" class="form-but" value="Login">
+            </form>
+        </div>
+    </div>
+    <div class="lower-bar">
+    </div>
+</body>
+</html>
