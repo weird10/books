@@ -2,6 +2,7 @@ from flask_app import app
 from flask_app.config.mysqlconnection import MySQLConnection, connectToMySQL
 from flask import  flash, session, request
 from flask_bcrypt import Bcrypt        
+from flask_app.models.sighting import Sighting
 
 import re
 
@@ -100,15 +101,18 @@ class User:
             }
             user.reported_sightings.append(data)
         return user
-
 #update
 
-
+    @classmethod
+    def be_skeptic(cls,data):
+        query="""
+        INSERT INTO skeptics (user_id,sighting_id)
+        VALUES (%(user_id)s,%(sighting_id)s)
+        ;"""
+        return connectToMySQL(cls.db).query_db(query,data)
 
 #delete
-
-   
-    #validate
+# validate
     @staticmethod
     def validate_user_regis(data):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')

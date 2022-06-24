@@ -25,10 +25,13 @@
             <table class="table-info">
                 <tbody>
                     {% for sighting in all_sightings %}
-                    <tr>
+                    <tr>                        
+                        <td><p class="text-sighting">Number of Skeptics: - </p></td>
+                            
+                        <td><p class="text-sighting">Location: {{sighting.skeptics}} {{sighting.location}}</p></td>
                         <td>
-                            <p class="text-sighting">{{sighting.location}} - {{sighting.time_that}}</p>
-                            <p class="text-sighting">Reported By: {{sighting.author}}</p>
+                            <p class="text-sighting"> - {{sighting.time_that}}</p></td>
+                        <td>    <p class="text-sighting">Reported By: {{sighting.author}}</p>
                         </td>
                         <td>
                             <a class="table-links" href="/sighting/{{sighting.id}}">View</a>

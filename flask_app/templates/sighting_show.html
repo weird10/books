@@ -20,9 +20,9 @@
         </div> 
     </div> 
     <div class="container">
-        <div class="list">
-            <h2 class="table-title">Details about this Sighting:</h2>
-            <table class="table-spaced">
+        <h2 class="table-title">Details about this Sighting:</h2>
+        <div class="table-split">
+            <table class="table">
                 <tr>
                     <td class="sightings"><h2>{{this_sighting.location}} on {{this_sighting.time_that}}</h2></td>
                 </tr>
@@ -30,18 +30,33 @@
                     <td class="sightings">What happened:</td>
                 </tr>
                 <tr>
-                    <td class="sightingsitalics">{{this_sighting.description}}</td>
+                    <td class="sightings-small">{{this_sighting.description}}</td>
                 </tr>
+            </table>
+            <table class="table">
                 <tr>
                     <td class="sightings"> # of Sasquatches : {{this_sighting.number}}</td>
                 </tr>        
                 <tr> 
-                    <td class="sightings">Reported by {{this_sighting.author}}</td>
+                    <td class="sightings">Reported by: {{this_sighting.author}}</td>
                 </tr>
             </table>
         </div>
-    </div>
-    <div class="lower-bar">
+        <table class="table-solo">
+            <tr>
+                <td class="sightings"><h2>Skeptics: </h2></td>
+                {% for skeptics in all_skeptics %}
+                <td class="skeptics"> {{skeptics.first_name}} {{skeptics.last_name}}</td>
+                {% endfor%}
+                <form action="/beskeptic" method="POST">
+                    <input type="hidden" name='user_id' value="{{ session['user_id'] }}">
+                    <input type="hidden" name='sighting_id' value="{{this_sighting.id}}">
+                    <input type="submit" value="Believe it!"> 
+                    </form>
+           
+            </tr>
+        </table>
+            
     </div>
 </body>
 </html>
